@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.myTube.Entities.Channel;
 import com.myTube.Entities.User;
+import com.myTube.Repositories.ChannelRepo;
 import com.myTube.Repositories.UserRepo;
+import com.myTube.Services.ChannelServiceImplimentation;
 import com.myTube.Services.UserServiceImplimentation;
+import com.myTube.web.dto.ChannelCreationDTO;
 import com.myTube.web.dto.UserRegistrationDTO;
 
 
@@ -25,6 +29,9 @@ public class UserResgitrationController {
 
 	@Autowired
 	public UserRepo userRepo;
+	
+	@Autowired
+	public ChannelRepo channelRepo;
 	
 	@ModelAttribute("User")
 	public UserRegistrationDTO userRegDTO()
@@ -42,6 +49,8 @@ public class UserResgitrationController {
 	public String registerUserAccount(@ModelAttribute("User") @Valid UserRegistrationDTO userDTO, BindingResult result)
 	{
 		UserServiceImplimentation newUserService = new UserServiceImplimentation();
+		ChannelServiceImplimentation newChannelService = new ChannelServiceImplimentation();
+		
 		User newUser = newUserService.createUserObject(userDTO);
 		
 		User existing =  userRepo.findByUseremail(newUser.getUseremail());
@@ -67,7 +76,16 @@ public class UserResgitrationController {
 
 		LocalDateTime now = LocalDateTime.now(); 
 		newUser.setAccountcreationdate(now.toString());
+		
+		ChannelCreationDTO newChannelDTO = new ChannelCreationDTO();
+		
+		newChannelDTO.setUser(newUser);
+		newChannelDTO.setChannelname(newUser.getUsername()+"'s Channel");
+		
+		Channel newChannel = newChannelService.createChannel(newChannelDTO);
+		
 		userRepo.saveAndFlush(newUser);
+		channelRepo.saveAndFlush(newChannel);
 		
 		return "LoginPage";
 	}
