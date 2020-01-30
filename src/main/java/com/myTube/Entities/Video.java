@@ -26,10 +26,10 @@ public class Video {
 	private float videolength;
 	
 	@Column(name="Video_Likes")
-	private float videolikes;
+	private int videolikes;
 	
 	@Column(name="Video_Dislikes")
-	private float videodislikes;
+	private int videodislikes;
 	
 	@Column(name="Video_Description")
 	private String videodescription;
@@ -47,8 +47,18 @@ public class Video {
 	}
 	
 	
+	
+	public Video(String videoname, float videolength, String videodescription, String videoURL) {
+		super();
+		this.videoname = videoname;
+		this.videolength = videolength;
+		this.videodescription = videodescription;
+		this.videoURL = videoURL;
+	}
 
-	public Video(String videoname, float videolength, float videolikes, float videodislikes, String videodescription,
+
+
+	public Video(String videoname, float videolength, int videolikes, int videodislikes, String videodescription,
 			String videoURL, Channel channel) {
 		super();
 		this.videoname = videoname;
@@ -63,7 +73,7 @@ public class Video {
 
 	
 
-	public Video(int videoId, String videoname, float videolength, float videolikes, float videodislikes,
+	public Video(int videoId, String videoname, float videolength, int videolikes, int videodislikes,
 			String videodescription, String videoURL, Channel channel) {
 		super();
 		this.videoId = videoId;
@@ -102,19 +112,19 @@ public class Video {
 		this.videolength = videolength;
 	}
 
-	public float getVideolikes() {
+	public int getVideolikes() {
 		return videolikes;
 	}
 
-	public void setVideolikes(float videolikes) {
+	public void setVideolikes(int videolikes) {
 		this.videolikes = videolikes;
 	}
 
-	public float getVideodislikes() {
+	public int getVideodislikes() {
 		return videodislikes;
 	}
 
-	public void setVideodislikes(float videodislikes) {
+	public void setVideodislikes(int videodislikes) {
 		this.videodislikes = videodislikes;
 	}
 

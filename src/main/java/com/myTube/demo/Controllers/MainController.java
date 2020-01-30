@@ -40,11 +40,6 @@ public class MainController {
 	    public String login() {
 	        return "login";
 	    }
-
-	    @GetMapping("/MyChannel")
-	    public String userChannel() {
-	        return "MyChannel";
-	    }
 	
 	
 }

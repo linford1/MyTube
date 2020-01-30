@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.myTube.Repositories.ChannelRepo;
 import com.myTube.Repositories.UserRepo;
 import com.myTube.Repositories.VideoRepo;
-public class UserChannelController {
 
-	@Controller
-	@RequestMapping(value="/MyChannel")
-	public class LoginPageController {
+@Controller
+@RequestMapping(value="/MyChannel")
+public class UserChannelController 
+{
 
 		@Autowired
 		public UserRepo userRepo;
@@ -40,6 +40,6 @@ public class UserChannelController {
 			model.addAttribute("userChannel",session.getAttribute("userChannel"));
 			return "UserChannelPage";
 		}
-	}
-		
 }
+		
+
