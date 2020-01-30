@@ -81,6 +81,7 @@ public class UserResgitrationController {
 		
 		newChannelDTO.setUser(newUser);
 		newChannelDTO.setChannelname(newUser.getUsername()+"'s Channel");
+		newChannelDTO.setChannelfollowers("");
 		
 		Channel newChannel = newChannelService.createChannel(newChannelDTO);
 		

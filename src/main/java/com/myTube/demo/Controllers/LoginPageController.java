@@ -37,7 +37,7 @@ public class LoginPageController {
 	}
 	
 	@GetMapping
-	public String RegistrationPage(Model model)
+	public String LoginPage()
 	{
 		return "LoginPage";
 	}
@@ -47,7 +47,6 @@ public class LoginPageController {
 	{
 		UserServiceImplimentation newUserService = new UserServiceImplimentation();
 		User newUser = newUserService.createUserObject(loginDTO);
-		ChannelServiceImplimentation newChannelService = new ChannelServiceImplimentation();
 		
 		User existing =  userRepo.findByUsername(newUser.getUsername());
 		if(existing == null)

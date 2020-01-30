@@ -24,7 +24,7 @@ public class MainController {
 	
 	   @GetMapping("/")
 	    public String root() {
-	        return "index";
+	        return "Index";
 	    }
 	   
 	   @GetMapping("/MainPage")
@@ -37,13 +37,13 @@ public class MainController {
 	   
 
 	    @GetMapping("/login")
-	    public String login(Model model) {
+	    public String login() {
 	        return "login";
 	    }
 
-	    @GetMapping("/MyChannelPage")
+	    @GetMapping("/MyChannel")
 	    public String userChannel() {
-	        return "MyChannelPage";
+	        return "MyChannel";
 	    }
 	
 	
