@@ -43,7 +43,9 @@ public class MainController {
 
 	    @GetMapping("/MyChannelPage")
 	    public String userChannel() {
+	    	
 	        return "MyChannelPage";
+	        
 	    }
 	
 	
