@@ -1,9 +1,9 @@
 package com.myTube.web.dto;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.myTube.Entities.Channel;
 
@@ -12,21 +12,22 @@ public class VideoDTO {
 	@NotEmpty
 	private String videoname;
 	
-	@NotEmpty
+	@NotNull
 	private float videolength;
 	
-	@NotEmpty
+	@NotNull
 	private int videolikes;
 	
-	@NotEmpty
+	@NotNull
 	private int videodislikes;
 	
+	@NotEmpty
 	private String videodescription;
 	
-	@NotEmpty
-	private String videoURL;
+	@NotNull
+	private MultipartFile videofile;
 	
-	@NotEmpty
+
 	private Channel channel;
 
 	public String getVideoname() {
@@ -69,13 +70,6 @@ public class VideoDTO {
 		this.videodescription = videodescription;
 	}
 
-	public String getVideoURL() {
-		return videoURL;
-	}
-
-	public void setVideoURL(String videoURL) {
-		this.videoURL = videoURL;
-	}
 
 	public Channel getChannel() {
 		return channel;
@@ -84,8 +78,16 @@ public class VideoDTO {
 	public void setChannel(Channel channel) {
 		this.channel = channel;
 	}
-	
-	
-	
+
+	public MultipartFile getVideofile() {
+		return videofile;
+	}
+
+	public void setVideofile(MultipartFile videofile) {
+		this.videofile = videofile;
+	}
+
+
+
 	
 }
