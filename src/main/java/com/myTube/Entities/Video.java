@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,24 +26,55 @@ public class Video {
 	private float videolength;
 	
 	@Column(name="Video_Likes")
-	private float videolikes;
+	private int videolikes;
 	
 	@Column(name="Video_Dislikes")
-	private float videodislikes;
+	private int videodislikes;
 	
 	@Column(name="Video_Description")
 	private String videodescription;
 	
 	@Column(name="Video_URL")
-	private String VideoURL;
+	private String videoURL;
 
+	@OneToOne
+	@JoinColumn(name="VideoChannel")
+	private Channel channel;
+	
 	public Video()
 	{
 		
 	}
 	
-	public Video(int videoId, String videoname, float videolength, float videolikes, float videodislikes,
-			String videodescription, String videoURL) {
+	
+	
+	public Video(String videoname, float videolength, String videodescription, String videoURL) {
+		super();
+		this.videoname = videoname;
+		this.videolength = videolength;
+		this.videodescription = videodescription;
+		this.videoURL = videoURL;
+	}
+
+
+
+	public Video(String videoname, float videolength, int videolikes, int videodislikes, String videodescription,
+			String videoURL, Channel channel) {
+		super();
+		this.videoname = videoname;
+		this.videolength = videolength;
+		this.videolikes = videolikes;
+		this.videodislikes = videodislikes;
+		this.videodescription = videodescription;
+		this.videoURL = videoURL;
+		this.channel = channel;
+	}
+
+
+	
+
+	public Video(int videoId, String videoname, float videolength, int videolikes, int videodislikes,
+			String videodescription, String videoURL, Channel channel) {
 		super();
 		this.videoId = videoId;
 		this.videoname = videoname;
@@ -49,19 +82,11 @@ public class Video {
 		this.videolikes = videolikes;
 		this.videodislikes = videodislikes;
 		this.videodescription = videodescription;
-		VideoURL = videoURL;
+		this.videoURL = videoURL;
+		this.channel = channel;
 	}
 
-	public Video(String videoname, float videolength, float videolikes, float videodislikes, String videodescription,
-			String videoURL) {
-		super();
-		this.videoname = videoname;
-		this.videolength = videolength;
-		this.videolikes = videolikes;
-		this.videodislikes = videodislikes;
-		this.videodescription = videodescription;
-		VideoURL = videoURL;
-	}
+
 
 	public int getVideoId() {
 		return videoId;
@@ -87,19 +112,19 @@ public class Video {
 		this.videolength = videolength;
 	}
 
-	public float getVideolikes() {
+	public int getVideolikes() {
 		return videolikes;
 	}
 
-	public void setVideolikes(float videolikes) {
+	public void setVideolikes(int videolikes) {
 		this.videolikes = videolikes;
 	}
 
-	public float getVideodislikes() {
+	public int getVideodislikes() {
 		return videodislikes;
 	}
 
-	public void setVideodislikes(float videodislikes) {
+	public void setVideodislikes(int videodislikes) {
 		this.videodislikes = videodislikes;
 	}
 
@@ -112,19 +137,28 @@ public class Video {
 	}
 
 	public String getVideoURL() {
-		return VideoURL;
+		return videoURL;
 	}
 
 	public void setVideoURL(String videoURL) {
-		VideoURL = videoURL;
+		this.videoURL = videoURL;
+	}
+
+	public Channel getChannel() {
+		return channel;
+	}
+
+	public void setChannel(Channel channel) {
+		this.channel = channel;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((VideoURL == null) ? 0 : VideoURL.hashCode());
+		result = prime * result + ((channel == null) ? 0 : channel.hashCode());
 		result = prime * result + videoId;
+		result = prime * result + ((videoURL == null) ? 0 : videoURL.hashCode());
 		result = prime * result + ((videodescription == null) ? 0 : videodescription.hashCode());
 		result = prime * result + Float.floatToIntBits(videodislikes);
 		result = prime * result + Float.floatToIntBits(videolength);
@@ -142,12 +176,17 @@ public class Video {
 		if (getClass() != obj.getClass())
 			return false;
 		Video other = (Video) obj;
-		if (VideoURL == null) {
-			if (other.VideoURL != null)
+		if (channel == null) {
+			if (other.channel != null)
 				return false;
-		} else if (!VideoURL.equals(other.VideoURL))
+		} else if (!channel.equals(other.channel))
 			return false;
 		if (videoId != other.videoId)
+			return false;
+		if (videoURL == null) {
+			if (other.videoURL != null)
+				return false;
+		} else if (!videoURL.equals(other.videoURL))
 			return false;
 		if (videodescription == null) {
 			if (other.videodescription != null)
@@ -168,6 +207,6 @@ public class Video {
 		return true;
 	}
 	
-
+	
 	
 }

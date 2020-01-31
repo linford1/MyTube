@@ -3,17 +3,18 @@ package com.myTube.demo.Controllers;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.myTube.Entities.Channel;
 import com.myTube.Entities.User;
+import com.myTube.Repositories.ChannelRepo;
 import com.myTube.Repositories.UserRepo;
 import com.myTube.Services.UserServiceImplimentation;
 import com.myTube.web.dto.UserLogInDTO;
@@ -25,6 +26,9 @@ public class LoginPageController {
 	@Autowired
 	public UserRepo userRepo;
 	
+	@Autowired
+	public ChannelRepo channelRepo;
+	
 	@ModelAttribute("User")
 	public UserLogInDTO userLoginDTO()
 	{
@@ -32,19 +36,18 @@ public class LoginPageController {
 	}
 	
 	@GetMapping
-	public String RegistrationPage(Model model)
+	public String LoginPage()
 	{
 		return "LoginPage";
 	}
 	
-	@PostMapping
+	@PostMapping()
 	public String registerUserAccount(@ModelAttribute("User") @Valid UserLogInDTO loginDTO, BindingResult result, HttpSession session)
 	{
 		UserServiceImplimentation newUserService = new UserServiceImplimentation();
 		User newUser = newUserService.createUserObject(loginDTO);
 		
 		User existing =  userRepo.findByUsername(newUser.getUsername());
-		
 		if(existing == null)
 		{
 			result.rejectValue("username", null, "The username entered is not current in use.");
@@ -63,7 +66,10 @@ public class LoginPageController {
 			return "LoginPage";
 		}
 		
-		//session.("mySessionAttribute", "someValue");
+		Channel existingUserChannel = channelRepo.findByUser(existing);
+		
+		session.setAttribute("user", existing);
+		session.setAttribute("userChannel", existingUserChannel);
 		return "MainPage";
 	}
 	
