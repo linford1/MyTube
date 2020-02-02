@@ -1,5 +1,6 @@
 package com.myTube.demo.Controllers;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -21,6 +22,7 @@ import com.myTube.Entities.Video;
 import com.myTube.Repositories.ChannelRepo;
 import com.myTube.Repositories.UserRepo;
 import com.myTube.Repositories.VideoRepo;
+import com.myTube.Services.ChannelServiceImplimentation;
 import com.myTube.Services.VideoServiceImplimentation;
 import com.myTube.web.dto.VideoDTO;
 
@@ -63,6 +65,7 @@ public class UploadVideoController {
 	{
 		
 		VideoServiceImplimentation newVideoService = new VideoServiceImplimentation();
+		ChannelServiceImplimentation newChannelService = new ChannelServiceImplimentation();
 		
 		videoDTO.setChannel((Channel)session.getAttribute("userChannel"));
 		
@@ -83,8 +86,14 @@ public class UploadVideoController {
 		}
 		
 		
+		Channel  channelToAddVideo = channelRepo.findById(newVideo.getChannel().getChannelId()).orElseThrow(() -> new EntityNotFoundException());
+		
+		newChannelService.AddVideoToChannel(channelToAddVideo, newVideo);
+		
+
 		videoRepo.saveAndFlush(newVideo);
-		return "UserChannelPage";
+		channelRepo.saveAndFlush(channelToAddVideo);
+		return "redirect:MyChannel";
 	}
 	
 	

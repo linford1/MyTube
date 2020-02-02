@@ -1,5 +1,7 @@
 package com.myTube.demo.Controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.myTube.Entities.Channel;
+import com.myTube.Entities.User;
+import com.myTube.Entities.Video;
 import com.myTube.Repositories.ChannelRepo;
 import com.myTube.Repositories.UserRepo;
 import com.myTube.Repositories.VideoRepo;
@@ -28,16 +33,27 @@ public class UserChannelController
 		public VideoRepo videoRepo;
 		
 		@GetMapping
-		public String MyChannelPage()
+		public String MyChannelPage(Model model,HttpSession session)
 		{
+			Channel userChannel = (Channel)session.getAttribute("userChannel");
+			
+			model.addAttribute("userChannel", userChannel.getChannelname());
+			
+			model.addAttribute("user",(User)session.getAttribute("user"));
+
+			List<Video> allChannelVideos = videoRepo.findBychannel((Channel)session.getAttribute("userChannel"));
+			
+			//session.setAttribute("allChannelVideos",allChannelVideos);
+			
+			model.addAttribute("allChannelVideos",allChannelVideos);
+			
 			return "UserChannelPage";
 		}
 		
 		@PostMapping
-		public String registerUserAccount(Model model,HttpSession session)
+		public String openUserChannel(Model model,HttpSession session)
 		{
-			model.addAttribute("user",session.getAttribute("user"));
-			model.addAttribute("userChannel",session.getAttribute("userChannel"));
+			
 			return "UserChannelPage";
 		}
 }

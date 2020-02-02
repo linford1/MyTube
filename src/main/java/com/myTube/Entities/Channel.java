@@ -1,5 +1,7 @@
 package com.myTube.Entities;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,12 +23,18 @@ public class Channel {
 	@Column(name="Channel_Name")
 	private String channelname;
 	
+	
 	@Column(name="Channel_Followers")
-	private String channelfollowers;
+	private ArrayList<Integer> channelfollowers;
+	
+	@Column(name="Channel_Videos")
+	private ArrayList<Integer> channelvideos;
 	
 	@OneToOne
 	@JoinColumn(name="ChannelUser")
 	private User user;
+	
+	
 
 	public int getChannelId() {
 		return channelId;
@@ -36,22 +44,7 @@ public class Channel {
 		this.channelId = channelId;
 	}
 
-	public String getChannelname() {
-		return channelname;
-	}
-
-	public void setChannelname(String channelname) {
-		this.channelname = channelname;
-	}
-
-	public String getChannelfollowers() {
-		return channelfollowers;
-	}
-
-	public void setChannelfollowers(String channelfollowers) {
-		this.channelfollowers = channelfollowers;
-	}
-
+	
 	public User getUser() {
 		return user;
 	}
@@ -60,25 +53,53 @@ public class Channel {
 		this.user = user;
 	}
 	
+	
+	public String getChannelname() {
+		return channelname;
+	}
+
+	public void setChannelname(String channelname) {
+		this.channelname = channelname;
+	}
+
+	public ArrayList<Integer> getChannelfollowers() {
+		return channelfollowers;
+	}
+
+	public void setChannelfollowers(ArrayList<Integer> channelfollowers) {
+		this.channelfollowers = channelfollowers;
+	}
+	
+	
+
+	public ArrayList<Integer> getChannelvideos() {
+		return channelvideos;
+	}
+
+	public void setChannelvideos(ArrayList<Integer> channelvideos) {
+		this.channelvideos = channelvideos;
+	}
+
 	public Channel()
 	{
 		
 	}
 
-	public Channel(String channelname, String channelfollowers, User user) {
-		super();
-		this.channelname = channelname;
-		this.channelfollowers = channelfollowers;
-		this.user = user;
-	}
-
-	
-	
-	public Channel(int channelId, String channelname, String channelfollowers, User user) {
+	public Channel(int channelId, String channelname, ArrayList<Integer> channelfollowers, ArrayList<Integer> channelvideos,
+			User user) {
 		super();
 		this.channelId = channelId;
 		this.channelname = channelname;
 		this.channelfollowers = channelfollowers;
+		this.channelvideos = channelvideos;
+		this.user = user;
+	}
+
+	public Channel(String channelname, ArrayList<Integer> channelfollowers, ArrayList<Integer> channelvideos, User user) {
+		super();
+		this.channelname = channelname;
+		this.channelfollowers = channelfollowers;
+		this.channelvideos = channelvideos;
 		this.user = user;
 	}
 
@@ -89,6 +110,7 @@ public class Channel {
 		result = prime * result + channelId;
 		result = prime * result + ((channelfollowers == null) ? 0 : channelfollowers.hashCode());
 		result = prime * result + ((channelname == null) ? 0 : channelname.hashCode());
+		result = prime * result + ((channelvideos == null) ? 0 : channelvideos.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
@@ -114,6 +136,11 @@ public class Channel {
 				return false;
 		} else if (!channelname.equals(other.channelname))
 			return false;
+		if (channelvideos == null) {
+			if (other.channelvideos != null)
+				return false;
+		} else if (!channelvideos.equals(other.channelvideos))
+			return false;
 		if (user == null) {
 			if (other.user != null)
 				return false;
@@ -121,6 +148,8 @@ public class Channel {
 			return false;
 		return true;
 	}
+
+	
 	
 	
 	

@@ -1,7 +1,7 @@
 package com.myTube.demo.Controllers;
 
 import java.time.LocalDateTime;
-
+import java.util.ArrayList;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +81,8 @@ public class UserResgitrationController {
 		
 		newChannelDTO.setUser(newUser);
 		newChannelDTO.setChannelname(newUser.getUsername()+"'s Channel");
-		newChannelDTO.setChannelfollowers("");
+		newChannelDTO.setChannelfollowers(new ArrayList<Integer>());
+		newChannelDTO.setChannelVideos(new ArrayList<Integer>());
 		
 		Channel newChannel = newChannelService.createChannel(newChannelDTO);
 		

@@ -1,17 +1,19 @@
 package com.myTube.Entities;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="Videos")
-public class Video {
+public class Video{
+
 
 	@Id
 	@Column(name="Video_ID")
@@ -37,7 +39,7 @@ public class Video {
 	@Column(name="Video_URL")
 	private String videoURL;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="VideoChannel")
 	private Channel channel;
 	

@@ -1,6 +1,8 @@
 package com.myTube.web.dto;
 
 
+import java.util.List;
+
 import javax.validation.constraints.NotEmpty;
 
 import com.myTube.Entities.User;
@@ -11,7 +13,10 @@ public class ChannelCreationDTO {
 	private String channelname;
 	
 	@NotEmpty
-	private String channelfollowers;
+	private List<Integer> channelfollowers;
+	
+	@NotEmpty
+	private List<Integer> channelVideos;
 	
 	@NotEmpty
 	private User user;
@@ -24,11 +29,11 @@ public class ChannelCreationDTO {
 		this.channelname = channelname;
 	}
 
-	public String getChannelfollowers() {
+	public List<Integer> getChannelfollowers() {
 		return channelfollowers;
 	}
 
-	public void setChannelfollowers(String channelfollowers) {
+	public void setChannelfollowers(List<Integer> channelfollowers) {
 		this.channelfollowers = channelfollowers;
 	}
 
@@ -39,7 +44,13 @@ public class ChannelCreationDTO {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
+	public List<Integer> getChannelVideos() {
+		return channelVideos;
+	}
+
+	public void setChannelVideos(List<Integer> channelVideo) {
+		this.channelVideos= channelVideo;
+	}
 	
 }
