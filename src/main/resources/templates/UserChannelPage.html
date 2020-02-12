@@ -12,7 +12,17 @@
     	th:text="${Video.getVideoname()}"> </p>
 		
 
-<video width="320" height="240"  th:each="Video: ${allChannelVideos}" th:src="${Video.getVideoURL()}" preload="auto" controls></video>
+<!--  <video width="320" height="240"  th:each="Video: ${allChannelVideos}" th:src="${Video.getVideoURL()}" preload="auto" controls></video>-->
+
+<div th:each="Video: ${allChannelVideos}" >
+	<video controls width="320" height="240" preload="auto" > 
+		<source th:src="${Video.getVideoURL()}"  type="video/mp4"/>
+	</video>
+</div>
+
+<video width="320" height="240" controls="controls">
+    <source src="https://mytubevideos-proj.s3.eu-west-2.amazonaws.com/small.mp4" type="video/mp4" />
+  </video>
 
 </body>
 </html>

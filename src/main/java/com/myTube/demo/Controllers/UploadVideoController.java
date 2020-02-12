@@ -22,8 +22,8 @@ import com.myTube.Entities.Video;
 import com.myTube.Repositories.ChannelRepo;
 import com.myTube.Repositories.UserRepo;
 import com.myTube.Repositories.VideoRepo;
-import com.myTube.Services.ChannelServiceImplimentation;
-import com.myTube.Services.VideoServiceImplimentation;
+import com.myTube.Services.Implementation.ChannelServiceImplimentation;
+import com.myTube.Services.Implementation.VideoServiceImplimentation;
 import com.myTube.web.dto.VideoDTO;
 
 @Controller

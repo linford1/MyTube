@@ -17,8 +17,8 @@ import com.myTube.Entities.Channel;
 import com.myTube.Entities.User;
 import com.myTube.Repositories.ChannelRepo;
 import com.myTube.Repositories.UserRepo;
-import com.myTube.Services.ChannelServiceImplimentation;
-import com.myTube.Services.UserServiceImplimentation;
+import com.myTube.Services.Implementation.ChannelServiceImplimentation;
+import com.myTube.Services.Implementation.UserServiceImplimentation;
 import com.myTube.web.dto.ChannelCreationDTO;
 import com.myTube.web.dto.UserRegistrationDTO;
 

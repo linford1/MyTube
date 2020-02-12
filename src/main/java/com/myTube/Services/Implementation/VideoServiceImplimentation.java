@@ -1,16 +1,16 @@
-package com.myTube.Services;
+package com.myTube.Services.Implementation;
 
 import java.io.File;
 import java.io.IOException;
-
 import org.springframework.web.multipart.MultipartFile;
-
 import com.myTube.Entities.Video;
 import com.myTube.web.dto.VideoDTO;
 
+
+
 public class VideoServiceImplimentation {
 	
-	private String videoStoragePath = "D:\\Eclipse Projects\\testFiles\\MytubeVersioned\\MyTube\\src\\VideoStorage\\";
+	private String videoStoragePath = "https://mytubevideos-proj.s3.eu-west-2.amazonaws.com//";
 
 	public Video CreateVideo(VideoDTO video)
 	{
