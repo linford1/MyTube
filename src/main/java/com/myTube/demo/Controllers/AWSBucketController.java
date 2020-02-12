@@ -35,35 +35,5 @@ public class AWSBucketController {
         return ""; //this.amazonClient.deleteFileFromS3Bucket(fileUrl);
     }
 
- /*   
-  * @PostMapping("/uploadFile")
-    public void uploadFile(@RequestPart(value = "file") MultipartFile file) {
-    	
-    	try 
-    	{
-    		File localFile = new File(file.getOriginalFilename());
-    		FileOutputStream fos = new FileOutputStream(localFile);
-    		fos.write(file.getBytes());
-    		fos.close();
-    		
-    		PutObjectRequest putObjectRequest = new PutObjectRequest("mytubevideos-proj", "TestFile", localFile);
-            this.amazonClient.putObject(putObjectRequest);
-    	}
-    	catch (IOException | AmazonServiceException ex) {
-            //logger.error("error [" + ex.getMessage() + "] occurred while uploading "); // [" + fileName + "] ");
-        }
-    	
-    }
-    
-  * @Async
-    @DeleteMapping("/deleteFile")
-    public void deleteFile(@RequestPart(value = "url") String fileUrl) {
-    	
-    	 try {
-    		 this.amazonClient.deleteObject(new DeleteObjectRequest("mytubevideos-proj", fileUrl));
-         } catch (AmazonServiceException ex) {
-            // logger.error("error [" + ex.getMessage() + "] occurred while removing [" + fileName + "] ");
-         }
-    }
-    */
+
 }

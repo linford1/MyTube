@@ -9,8 +9,6 @@ import com.myTube.web.dto.VideoDTO;
 
 
 public class VideoServiceImplimentation {
-	
-	private String videoStoragePath = "https://mytubevideos-proj.s3.eu-west-2.amazonaws.com//";
 
 	public Video CreateVideo(VideoDTO video)
 	{
@@ -21,7 +19,7 @@ public class VideoServiceImplimentation {
 		newVideo.setVideodislikes(video.getVideodislikes());
 		newVideo.setVideolength(video.getVideolength());
 		newVideo.setVideolikes(video.getVideolikes());
-		newVideo.setVideoURL(videoStoragePath+video.getVideoname()+".mp4");
+		newVideo.setVideoURL(video.getVideoname());
 		newVideo.setVideoname(video.getVideoname());
 		
 		return newVideo;
@@ -31,7 +29,7 @@ public class VideoServiceImplimentation {
 	{
 		try
 		{
-		video.transferTo(new File(videoStoragePath+videoName));
+		video.transferTo(new File(videoName));
 		}
 		catch(IOException e)
 		{

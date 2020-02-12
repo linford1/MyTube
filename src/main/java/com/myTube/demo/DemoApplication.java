@@ -7,14 +7,14 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication
+
 
 @EnableJpaRepositories(basePackages = "com.myTube.Repositories")
 
 @EntityScan(basePackages = "com.myTube.Entities")
 @ComponentScan({"com.myTube.Services"})
 @ComponentScan(basePackages="com.myTube.demo")
-
+@SpringBootApplication
 public class DemoApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {

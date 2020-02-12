@@ -22,6 +22,7 @@ import com.myTube.Entities.Video;
 import com.myTube.Repositories.ChannelRepo;
 import com.myTube.Repositories.UserRepo;
 import com.myTube.Repositories.VideoRepo;
+import com.myTube.Services.Implementation.AmazonClient;
 import com.myTube.Services.Implementation.ChannelServiceImplimentation;
 import com.myTube.Services.Implementation.VideoServiceImplimentation;
 import com.myTube.web.dto.VideoDTO;
@@ -38,6 +39,9 @@ public class UploadVideoController {
 	
 	@Autowired
 	public VideoRepo videoRepo;
+	
+	@Autowired
+	private AmazonClient amazonClient;
 	
 	@ModelAttribute("video")
 	public VideoDTO videoDTO()
@@ -69,11 +73,7 @@ public class UploadVideoController {
 		
 		videoDTO.setChannel((Channel)session.getAttribute("userChannel"));
 		
-		Video newVideo = newVideoService.CreateVideo(videoDTO);
 		
-		MultipartFile videoFile = videoDTO.getVideofile();
-		
-		newVideoService.UploadVideoFile(videoFile, videoDTO.getVideoname()+".mp4");
 				
 		if(videoDTO.getVideofile() == null)
 		{
@@ -85,10 +85,19 @@ public class UploadVideoController {
 			return "UploadVideoPage";
 		}
 		
+		Video newVideo = newVideoService.CreateVideo(videoDTO);
+		
+		newVideo.setVideoURL(amazonClient.uploadFile(videoDTO.getVideofile()));
+		
+		MultipartFile videoFile = videoDTO.getVideofile();
+		
+		
+		//newVideoService.UploadVideoFile(videoFile, videoDTO.getVideoname()+".mp4");
+		
 		
 		Channel  channelToAddVideo = channelRepo.findById(newVideo.getChannel().getChannelId()).orElseThrow(() -> new EntityNotFoundException());
 		
-		newChannelService.AddVideoToChannel(channelToAddVideo, newVideo);
+		newChannelService.AddVideoToChannel(channelToAddVideo, newVideo); /// might want to change
 		
 
 		videoRepo.saveAndFlush(newVideo);
