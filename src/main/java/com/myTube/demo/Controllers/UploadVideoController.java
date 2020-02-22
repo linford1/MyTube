@@ -87,19 +87,17 @@ public class UploadVideoController {
 		
 		Video newVideo = newVideoService.CreateVideo(videoDTO);
 		
-		newVideo.setVideoURL(amazonClient.uploadFile(videoDTO.getVideofile()));
+		Channel  channelToAddVideo = channelRepo.findById(newVideo.getChannel().getChannelId()).orElseThrow(() -> new EntityNotFoundException());
+		
+		newChannelService.AddVideoToChannel(channelToAddVideo, newVideo); /// might want to change
+		
+		newVideo.setVideoURL(amazonClient.uploadFile(videoDTO.getVideofile(), channelToAddVideo.getChannelname()+channelToAddVideo.getUser().getUsername()));
 		
 		MultipartFile videoFile = videoDTO.getVideofile();
 		
 		
 		//newVideoService.UploadVideoFile(videoFile, videoDTO.getVideoname()+".mp4");
 		
-		
-		Channel  channelToAddVideo = channelRepo.findById(newVideo.getChannel().getChannelId()).orElseThrow(() -> new EntityNotFoundException());
-		
-		newChannelService.AddVideoToChannel(channelToAddVideo, newVideo); /// might want to change
-		
-
 		videoRepo.saveAndFlush(newVideo);
 		channelRepo.saveAndFlush(channelToAddVideo);
 		return "redirect:MyChannel";

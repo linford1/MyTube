@@ -13,5 +13,5 @@ public interface AmazonS3WebService {
 	
 	public void uploadFileTos3bucket(String fileName, File file) throws IOException;
 	
-	public String uploadFile(MultipartFile multipartFile) throws IOException; 
+	public String uploadFile(MultipartFile multipartFile, String FolderName) throws IOException; 
 }

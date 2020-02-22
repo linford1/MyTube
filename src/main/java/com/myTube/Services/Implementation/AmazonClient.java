@@ -60,19 +60,20 @@ public class AmazonClient implements AmazonS3WebService{
 	            .withCannedAcl(CannedAccessControlList.PublicRead));
 	}
 	
-	public String uploadFile(MultipartFile multipartFile) {
+	public String uploadFile(MultipartFile multipartFile, String FolderName) {
 
 	    String fileUrl = "";
 	    try {
 	        File file = convertMultiPartToFile(multipartFile);
 	        String fileName = generateFileName(multipartFile);
-	        fileUrl = endpointUrl + "/" + /* bucketName + "/" +*/ fileName;
-	        uploadFileTos3bucket(fileName, file);
+	        fileUrl = endpointUrl + "/"+FolderName+"/"+fileName;
+	        uploadFileTos3bucket(FolderName+"/"+fileName, file);
 	        file.delete();
 	    } catch (Exception e) {
 	       e.printStackTrace();
 	    }
 	    return fileUrl;
 	}
+
 	
 }
