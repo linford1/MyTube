@@ -82,7 +82,7 @@ public class Channel {
 
 	public Channel()
 	{
-		
+		 
 	}
 
 	public Channel(int channelId, String channelname, ArrayList<Integer> channelfollowers, ArrayList<Integer> channelvideos,
