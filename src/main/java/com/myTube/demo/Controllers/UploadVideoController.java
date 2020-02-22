@@ -95,9 +95,6 @@ public class UploadVideoController {
 		
 		MultipartFile videoFile = videoDTO.getVideofile();
 		
-		
-		//newVideoService.UploadVideoFile(videoFile, videoDTO.getVideoname()+".mp4");
-		
 		videoRepo.saveAndFlush(newVideo);
 		channelRepo.saveAndFlush(channelToAddVideo);
 		return "redirect:MyChannel";
