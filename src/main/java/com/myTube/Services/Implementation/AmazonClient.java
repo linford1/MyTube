@@ -67,7 +67,7 @@ public class AmazonClient implements AmazonS3WebService{
 	        File file = convertMultiPartToFile(multipartFile);
 	        String fileName = generateFileName(multipartFile);
 	        fileUrl = endpointUrl + "/"+FolderName+"/"+fileName;
-	        uploadFileTos3bucket(FolderName+"/"+fileName, file);
+	        uploadFileTos3bucket(FolderName + "/" + fileName, file);
 	        file.delete();
 	    } catch (Exception e) {
 	       e.printStackTrace();
