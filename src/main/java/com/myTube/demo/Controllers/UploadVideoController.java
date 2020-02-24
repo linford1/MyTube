@@ -1,5 +1,7 @@
 package com.myTube.demo.Controllers;
 
+import java.io.IOException;
+
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -92,6 +94,12 @@ public class UploadVideoController {
 		newChannelService.AddVideoToChannel(channelToAddVideo, newVideo); /// might want to change
 		
 		newVideo.setVideoURL(amazonClient.uploadFile(videoDTO.getVideofile(), channelToAddVideo.getChannelname()+channelToAddVideo.getUser().getUsername()));
+		try {
+			newVideo.setVideolength((int)videoDTO.getVideofile().getResource().contentLength());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		MultipartFile videoFile = videoDTO.getVideofile();
 		

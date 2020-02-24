@@ -75,7 +75,7 @@ public class LoginPageController {
 		session.setAttribute("user", existing);
 		session.setAttribute("userChannel", existingUserChannel);
 		
-		return "MainPage";
+		return "redirect:MainPage";
 	}
 	
 }

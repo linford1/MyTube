@@ -1,5 +1,7 @@
 package com.myTube.demo.Controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.myTube.Entities.Channel;
+import com.myTube.Entities.Video;
 import com.myTube.Repositories.ChannelRepo;
 import com.myTube.Repositories.UserRepo;
 import com.myTube.Repositories.VideoRepo;
@@ -31,6 +35,10 @@ public class MainController {
 	    public String MainPage(Model model, HttpSession session) {
 		   
 		   model.addAttribute("user", session.getAttribute("user"));
+		   
+		   List<Video> allVideosForMainPage = videoRepo.findAll();
+		   
+		   model.addAttribute("allVideosForMainPage", allVideosForMainPage);
 		   
 	       return "MainPage";
 	    }

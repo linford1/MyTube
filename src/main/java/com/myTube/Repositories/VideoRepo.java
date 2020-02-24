@@ -10,4 +10,5 @@ import com.myTube.Entities.Video;
 public interface VideoRepo extends JpaRepository<Video, Integer>{
 
 	ArrayList<Video> findBychannel(Channel channel);
+	
 }

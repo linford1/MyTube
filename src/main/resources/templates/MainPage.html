@@ -8,5 +8,14 @@
 
 <p>Main Page!!</p>
 <a th:href="@{MyChannel}">View Your Channel</a>
+
+<div>
+	<div style="display:inline-grid;" th:each="Video: ${allVideosForMainPage}" class="t">
+		<video width="320" height="240" th:src="${Video.getVideoURL()}" preload="auto" controls/></video>
+		<span th:text="${Video.getVideoname()}"/></span> <span th:text="${Video.getVideolength()}"/></span>
+	</div>
+</div>
+
+
 </body>
 </html>

@@ -43,8 +43,6 @@ public class UserChannelController
 
 			List<Video> allChannelVideos = videoRepo.findBychannel((Channel)session.getAttribute("userChannel"));
 			
-			//session.setAttribute("allChannelVideos",allChannelVideos);
-			
 			model.addAttribute("allChannelVideos",allChannelVideos);
 			
 			return "UserChannelPage";
